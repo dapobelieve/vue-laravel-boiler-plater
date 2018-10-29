@@ -76,6 +76,10 @@ export default {
             this.register({
                 payLoad: this.form,
                 context: this
+            }).then(() => {
+                this.$router.replace({
+                    name: 'home'
+                })
             })
         }
     }

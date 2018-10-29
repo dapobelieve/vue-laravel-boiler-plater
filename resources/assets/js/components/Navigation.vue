@@ -34,20 +34,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" >
                                    {{ user.data.name }} <span class="caret"></span>
                                 </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="#"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="#" method="POST" style="display: none;">
-                                            <!-- {{ csrf_field() }} -->
-                                        </form>
-                                    </li>
-                                </ul>
+                                <a href="#" @click.prevent="signout">logout</a>
                             </li>
                         <!-- @endguest -->
                     </ul>
@@ -58,12 +45,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     computed: {
         ...mapGetters({
             user: 'auth/user'
         })
+    },
+    methods: {
+        ...mapActions({
+            logout: 'auth/logout'
+        }),
+        signout () {
+            this.logout().then(() => {
+                alert('GoodBye :(')
+                this.$router.replace({ name: 'login' })
+            })
+        }
     },
     mounted() {
         // console.log(this.user)

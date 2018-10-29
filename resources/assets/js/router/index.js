@@ -2,8 +2,7 @@ import Vue from 'vue'
 
 import Router from 'vue-router'
 import { routes as routes } from '../app/index'
-
-console.log(routes)
+import beforeEach from './beforeEach'
 
 Vue.use(Router)
 
@@ -11,5 +10,10 @@ Vue.use(Router)
 const router = new Router({
     routes: routes
 });
+
+
+// register beforeEach Hooks
+router.beforeEach(beforeEach)
+
 
 export default router
